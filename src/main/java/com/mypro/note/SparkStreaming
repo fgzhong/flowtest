@@ -1,0 +1,17 @@
+
+
+1/ SparkStreaming + kafka
+   1、receiver与direct对比
+     1、receiver：使用Kafka的高阶API来在ZooKeeper中保存消费过的offset的，配合着WAL机制可以保证数据零丢失的高可靠性
+                 无法保证数据被处理一次且仅一次，可能会处理两次————Spark和ZooKeeper之间可能是不同步的
+     2、direct：
+           简化并行
+               不需要创建多个kafka输入流，然后union它们
+               sparkStreaming将会创建和kafka分区一种的rdd的分区数，而且会从kafka中并行读取数据
+               spark中RDD的分区数和kafka中的分区数据是一一对应的关系
+           高效
+              第一种实现数据的零丢失是将数据预先保存在WAL中，会复制一遍数据，会导致数据被拷贝两次。第一次是被kafka复制，另一次是写到WAL中
+              没有receiver的这种方式消除了这个问题。
+           恰好一次语义
+              通过实现kafka低层次api，偏移量仅仅被ssc保存在checkpoint中，消除了zk和ssc偏移量不一致的问题
+              无法使用基于zookeeper的kafka监控工具

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!-- Configuration overrides used during unit tests. -->
+
+<configuration>
+
+    <property>
+      <name>test</name>
+      <value>testee</value>
+    </property>
+    <property>
+        <name>es.input.max.docs.per.partition</name>
+        <value>10000</value>
+    </property>
+    <property>
+        <name>spider.fetch.thread.num</name>
+        <value>30</value>
+    </property>
+    <!--<property>
+        <name>spider.fetch.http.classes</name>
+        <value>com.mypro.spider.protocol.httputil.jsoup.Jsoups</value>
+    </property> -->
+    <property>
+        <name>es.nodes</name>
+        <value>es1.ali.szol.bds.com:9200,es2.ali.szol.bds.com:9200</value>
+    </property>
+    <property>
+        <name>es.query</name>
+        <value>{"query":{"bool":{"filter":[{"term":{"status":0}},{"range":{"retries":{"lte":5}}}]}},"size":2}</value>
+    </property>
+    <!--<property>-->
+        <!--<name>mapreduce.job.reduces</name>-->
+        <!--<value>20</value>-->
+    <!--</property>-->
+    <property>
+        <name>mapreduce.map.memory.mb</name>
+        <value>1024</value>
+    </property>
+    <property>
+        <name>mapreduce.job.running.map.limit</name>
+        <value>100</value>
+    </property>
+	<property>
+		<name>yarn.application.classpath</name>
+		<value>/home/maplecloudy/program/pconline-weibo/pconline-bds-spider/hadoop-conf/*</value>
+	</property>
+	<property>
+		<name>mapreduce.application.classpath</name>
+		<value>/home/maplecloudy/program/pconline-weibo/pconline-bds-spider/hadoop-conf/*</value>
+	</property>
+
+</configuration>
+

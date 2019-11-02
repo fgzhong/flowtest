@@ -1,0 +1,97 @@
+
+/*   base   */
+spark.extraListeners                     注册监听器，需要实现SparkListener
+spark.local.dir                          /tmp/目录, Spark中暂存空间的使用目录, LOCAL_DIRS(YARN)环境变量覆盖
+spark.logConf=INFO                       log等级
+
+spark.master
+spark.submit.deployMode                  client/cluster，本地模式、远程集群模式
+spark.files                              加载外部配置文件
+spark.jars                               加载依赖jar
+spark.jars.packages                      基于maven，下载并加载jar
+spark.jars.excludes                      剔除jar
+spark.jars.ivy                           jar下载后保存位置
+spark.jars.ivySettings
+spark.jars.repositories                  远程仓库位置
+
+spark.driver.cores=1                     driver端可用core
+spark.driver.maxResultSize=1g            driver端接收的最大结果
+spark.driver.memory=1g                   driver端可用内存
+spark.driver.memoryOverhead=0.1          driver的堆外内存大小设置
+spark.driver.supervise=false             driver失败重启，仅在Mesos下有用
+spark.driver.extraClassPath/--driver-class-path         附加到driver的classpath的额外的classpath实体
+spark.driver.extraJavaOptions          driver 的 JVM 参数， GC设置或者其它日志设置， -Dhdp.version=2.6.0-cdh5.8.3   hadoop版本
+spark.driver.extraLibraryPath            指定启动driver的JVM时用到的库路径
+spark.driver.userClassPathFirst=false    是否优先使用自己的jar，解决与spark jar冲突
+
+spark.executor.memory=1g                 每个executor进程使用的内存数
+spark.executor.cores=1                   每个executor进程可使用的CPU数
+spark.executor.memoryOverhead            executor的堆外内存大小设置
+
+spark.executor.extraClassPath            附加到executors的classpath的额外的classpath实体
+spark.executor.extraJavaOptions          传递给executors的JVM选项字符串
+spark.executor.userClassPathFirst
+spark.executorEnv.[EnvironmentVariableName]             将指定的环境变量添加EnvironmentVariableName到Executor进程。用户可以指定其中的多个来设置多个环境变量
+spark.executor.extraLibraryPath          指定启动executor的JVM时用到的库路径
+
+spark.executor.logs.rolling.maxRetainedFiles=false      设置系统将保留的最新滚动日志文件的数量。旧的日志文件将被删除
+spark.executor.logs.rolling.enableCompression=false     日志压缩
+spark.executor.logs.rolling.maxSize      日志大小
+spark.executor.logs.rolling.strategy     日志滚动策略
+spark.executor.logs.rolling.time.interval               日志滚动策略
+
+
+spark.reducer.maxSizeInFlight             下层reduce每次拉取上层map的最大数据量，增大减小传输次数，基于netty的堆外内存缓冲
+spark.reducer.maxReqsInFlight             限制远程机器拉取本机器文件块的请求数，随着集群增大，需要对此做出限制。否则可能会使本机负载过大而挂掉
+spark.reducer.maxBlocksInFlightPerAddress               限制了每个主机每次reduce可以被多少台远程主机拉取文件块,调低这个参数可以有效减轻node manager的负载
+spark.reducer.maxReqSizeShuffleToMem      shuffle请求的文件块大小 超过这个参数值，就会被强行落盘，防止一大堆并发请求把内存占满
+spark.shuffle.blockTransferService        实现用来在executor直接传递shuffle和缓存块。有两种可用的实现：netty和nio。基于netty的块传递在具有相同的效率情况下更简单
+spark.shuffle.compress=true               是否压缩map输出文件
+spark.shuffle.spill.compress=true         shuffle过程中溢出的文件是否压缩
+spark.shuffle.file.buffer=32k             在内存输出流中 每个shuffle文件占用内存大小，适当提高 可以减少磁盘读写 io次数，初始值为32k
+spark.shuffle.spill                      通过将多出的数据写入磁盘来限制内存数
+spark.shuffle.memoryFraction              该参数代表了Executor内存中，分配给shuffle read task进行聚合操作的内存比例，默认是20%
+spark.shuffle.manager                     它的实现用于shuffle数据。有两种可用的实现：sort和hash。基于sort的shuffle有更高的内存使用率
+spark.shuffle.consolidateFiles
+spark.shuffle.io.maxRetries              reduce拉取数据失败重试次数
+spark.shuffle.io.retryWait               reduce拉取数据最大等待时间
+
+
+spark.broadcast.compress                 广播变量是否先进行压缩
+spark.closure.serializer                 序列化类
+spark.serializer=org.apache.spark.serializer.KryoSerializer
+spark.kryo.classesToRegister             如果你用Kryo序列化，给定的用逗号分隔的自定义类名列表表示要注册的类
+spark.kryo.referenceTracking
+spark.kryo.registrationRequired
+spark.kryo.registrator
+spark.kryoserializer.buffer.max.mb
+spark.kryoserializer.buffer.mb
+spark.io.compression.codec=lz4           压缩方式,lz4,lzf,snappy
+spark.io.compression.lz4.blockSize       使用lz4压缩时，每个数据块大小 默认32k，降低这个块的大小也会降低shuffle内存使用率
+spark.io.compression.snappy.blockSize
+spark.rdd.compress                       rdd是否压缩，减小内存，消耗CPU
+spark.serializer.objectStreamReset
+
+
+spark.dynamicAllocation.enabled          资源动态分配，多用多拿，不用放回
+spark.dynamicAllocation.minExecutors     动态最小executor数
+spark.dynamicAllocation.maxExecutors     动态最大executor数
+spark.dynamicAllocation.schedulerBacklogTimeout          资源不够（有task在pending的时候），间隔多久会去申请额外的资源
+spark.dynamicAllocation.sustainedSchedulerBacklogTimeout            首次之后，资源不够时，申请资源间隔
+spark.dynamicAllocation.executorIdleTimeout              不用资源多少时间
+
+
+spark.sql.hive.thriftServer.singleSession 可查看持久化表
+
+
+
+
+
+
+
+
+
+
+
+
+

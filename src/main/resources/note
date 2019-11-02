@@ -1,0 +1,30 @@
+#############################################################################
+AttemptID:attempt_1550808423640_13798_m_000171_1 Timed out after 600 secs
+
+mapreduce.task.timeout:如果一个task在一定时间内没有任何进入，即不会读取新的数据，也没有输出数据，则认为该 task 处于 block 状态，可能是临时卡住，也许永远会卡住。
+为了防止因为用户程序永远 block 不退出，则强制设置了一个超时时间（单位毫秒），默认是600000，值为 0 将禁用超时。
+es map 失败重试时 srollid 超时过期无法获取数据
+
+#############################################################################
+Error: org.apache.hadoop.mapreduce.task.reduce.Shuffle$ShuffleError: error in shuffle in fetcher#4
+at org.apache.hadoop.mapreduce.task.reduce.Shuffle.run(Shuffle.java:134)
+at org.apache.hadoop.mapred.ReduceTask.run(ReduceTask.java:376)
+at org.apache.hadoop.mapred.YarnChild$2.run(YarnChild.java:164)
+at java.security.AccessController.doPrivileged(Native Method)
+at javax.security.auth.Subject.doAs(Subject.java:422)
+at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1924)
+at org.apache.hadoop.mapred.YarnChild.main(YarnChild.java:158)
+Caused by: java.lang.OutOfMemoryError: Java heap space
+at org.apache.hadoop.io.BoundedByteArrayOutputStream.<init>(BoundedByteArrayOutputStream.java:56)
+at org.apache.hadoop.io.BoundedByteArrayOutputStream.<init>(BoundedByteArrayOutputStream.java:46)
+at org.apache.hadoop.mapreduce.task.reduce.InMemoryMapOutput.<init>(InMemoryMapOutput.java:63)
+at org.apache.hadoop.mapreduce.task.reduce.MergeManagerImpl.unconditionalReserve(MergeManagerImpl.java:309)
+at org.apache.hadoop.mapreduce.task.reduce.MergeManagerImpl.reserve(MergeManagerImpl.java:299)
+at org.apache.hadoop.mapreduce.task.reduce.Fetcher.copyMapOutput(Fetcher.java:539)
+at org.apache.hadoop.mapreduce.task.reduce.Fetcher.copyFromHost(Fetcher.java:348)
+at org.apache.hadoop.mapreduce.task.reduce.Fetcher.run(Fetcher.java:198)
+
+conf.setFloat("mapreduce.reduce.shuffle.memory.limit.percent", 0.1f);
+
+
+#############################################################################

@@ -1,0 +1,43 @@
+
+
+
+
+spark.yarn.am.memory=512m                            client 模式时，am的内存大小；cluster模式时，使用spark.driver.memory变量
+spark.yarn.am.cores=1                                client 模式时，am的cpu个数；cluster模式时，使用spark.driver.cores变量
+spark.yarn.am.waitTime=100s                          启动时等待时间
+spark.yarn.submit.file.replication=3                 应用程序上传到HDFS的文件的副本数
+spark.yarn.preserve.staging.files=false              若为true，在job结束后，将stage相关的文件保留而不是删除
+spark.yarn.scheduler.heartbeat.interval-ms=3000      Spark AppMaster发送心跳信息给YARN RM的时间间隔
+spark.yarn.max.executor.failures=2倍于executor数，最小值3                              导致应用程序宣告失败的最大executor失败次数
+spark.yarn.applicationMaster.waitTries=10            RM等待Spark AppMaster启动重试次数，也就是SparkContext初始化次数。超过这个数值，启动失败
+spark.eventLog.dir=hdfs://****/user/spark/spark2ApplicationHistory
+spark.yarn.historyServer.address                     Spark history server的地址（不要加 http://）。这个地址会在Spark应用程序完成后提交给YARN RM，然后RM将信息从RM UI写到history server UI上。
+spark.yarn.historyServer.allowTracking=true
+spark.yarn.dist.archives                             将要解压到每个executor工作目录下的压缩包
+spark.yarn.dist.files                                将要复制到每个executor工作目录下的文件
+spark.yarn.dist.forceDownloadSchemes
+spark.executor.instances=2                           executor实例个数
+spark.yarn.executor.memoryOverhead=executorMemory * 0.07, with minimum of 384         executor的堆内存大小设置
+spark.yarn.driver.memoryOverhead=driverMemory * 0.07, with minimum of 384             driver的堆内存大小设置
+spark.yarn.am.memoryOverhead=AM memory * 0.07, with minimum of 384                    am的堆内存大小设置，在client模式时设置
+spark.yarn.queue=default                             使用yarn的队列
+spark.yarn.jars                                      程序依赖jars
+spark.yarn.archive                                   程序依赖jars
+#spark.yarn.access.namenodes
+spark.yarn.appMasterEnv.[EnvironmentVariableName]    设置am的环境变量
+spark.yarn.containerLauncherMaxThreads=25            am启动executor的最大线程数
+spark.yarn.am.extraJavaOptions
+spark.yarn.am.extraLibraryPath
+spark.yarn.maxAppAttempts=yarn.resourcemanager.am.max-attempts
+spark.yarn.am.attemptFailuresValidityInterval
+spark.yarn.executor.failuresValidityInterval
+spark.yarn.submit.waitAppCompletion
+spark.yarn.am.nodeLabelExpression
+spark.yarn.executor.nodeLabelExpression
+spark.yarn.tags
+spark.yarn.config.gatewayPath
+spark.yarn.config.replacementPath
+spark.yarn.rolledLog.includePattern
+spark.yarn.rolledLog.excludePattern
+spark.yarn.blacklist.executor.launch.blacklisting.enabled
+spark.yarn.metrics.namespace
