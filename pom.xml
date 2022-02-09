@@ -15,7 +15,7 @@
         <scala.version>2.11.8</scala.version>
         <mahout.version>0.9</mahout.version>
         <!--<hadoop.version>2.6.0-cdh5.15.1</hadoop.version>-->
-        <hadoop.version>2.6.0</hadoop.version>
+        <hadoop.version>2.10.1</hadoop.version>
         <spark.version>2.3.0</spark.version>
         <kafka.version>2.3.0</kafka.version>
         <!--<elastic.version>7.2.0</elastic.version>-->
